@@ -22,7 +22,8 @@ st.write("Enter the child details (20 parameters), upload photo, then click Pred
 
 # --- Streamlit form for input ---
 with st.form("input_form"):
-    Age = st.number_input("Age (months)", min_value=0, max_value=240, value=24, step=1)
+    Age_years = st.number_input("Age (years)", min_value=0.0, max_value=20.0, value=2.0, step=0.1) 
+    Age = Age_years * 12  # convert years to months for the model
     Weight = st.number_input("Weight (kg)", min_value=0.1, value=10.0, step=0.1)
     Height = st.number_input("Height (cm)", min_value=10.0, value=80.0, step=0.1)  # float defaults
     BMI = st.number_input("BMI (optional) - leave 0 if unknown", min_value=0.0, value=0.0, step=0.1)
