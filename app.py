@@ -48,6 +48,13 @@ with st.form("input_form"):
     Hemoglobin = st.number_input("Hemoglobin (g/dL)", min_value=0.0, value=0.0, step=0.1)
     Ferritin = st.number_input("Ferritin (ng/mL)", min_value=0.0, value=0.0, step=0.1)
     CRP = st.number_input("CRP (mg/L)", min_value=0.0, value=0.0, step=0.1)
+    WBC = st.number_input("WBC Count (×10⁹/L)", min_value=0.0, value=0.0, step=0.1)
+    RBC = st.number_input("RBC Count (×10¹²/L)", min_value=0.0, value=0.0, step=0.1)
+    Platelets = st.number_input("Platelet Count (×10⁹/L)", min_value=0.0, value=0.0, step=1.0)
+    Serum_Iron = st.number_input("Serum Iron (µg/dL)", min_value=0.0, value=0.0, step=0.1)
+    VitaminD = st.number_input("Vitamin D (ng/mL)", min_value=0.0, value=0.0, step=0.1)
+    Calcium = st.number_input("Calcium (mg/dL)", min_value=0.0, value=0.0, step=0.1)
+    Albumin = st.number_input("Albumin (g/dL)", min_value=0.0, value=0.0, step=0.1)
 
     uploaded_file = st.file_uploader("Upload child photo (JPEG/PNG)", type=["jpg","jpeg","png"])
     submitted = st.form_submit_button("Predict")
@@ -57,7 +64,7 @@ if submitted:
     # Create dataframe for preprocessing
     input_dict = {
         "Age": Age, "Weight": Weight, "Height": Height,
-        "BMI": BMI if BMI > 0 else None,
+        "BMI": BMI if BMI > 0 else np.nan,
         "Gender": Gender, "Mother's Education": Mother_Edu, "Father's Education": Father_Edu,
         "Household Income (monthly)": Household_Income, "Meals per Day": Meals_per_Day,
         "Vaccination Status": Vaccination_Status, "Access to Clean Water": Access_Clean_Water,
@@ -65,7 +72,16 @@ if submitted:
         "Food Habits": Food_Habits, "Inherited Diseases": Inherited_Diseases,
         "Appetite Level": Appetite_Level, "Place of Birth": Place_of_Birth,
         "Sanitation Access": Sanitation_Access, "Breastfeeding Duration (months)": Breastfeeding_Duration,
-        "Hemoglobin": Hemoglobin, "Ferritin": Ferritin, "CRP": CRP
+        "Hemoglobin": Hemoglobin if Hemoglobin > 0 else np.nan,
+        "Ferritin": Ferritin if Ferritin > 0 else np.nan,
+        "CRP": CRP if CRP > 0 else np.nan,
+        "WBC": WBC if WBC > 0 else np.nan,
+        "RBC": RBC if RBC > 0 else np.nan,
+        "Platelets": Platelets if Platelets > 0 else np.nan,
+        "Serum Iron": Serum_Iron if Serum_Iron > 0 else np.nan,
+        "Vitamin D": VitaminD if VitaminD > 0 else np.nan,
+        "Calcium": Calcium if Calcium > 0 else np.nan,
+        "Albumin": Albumin if Albumin > 0 else np.nan
     }
 
     st.subheader("Inputs (as form)")
